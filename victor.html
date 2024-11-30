@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Vérification de Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            /* Ajout de l'image de fond */
+            background-image: url('background.jpg');
+            background-size: cover; /* Ajuste la taille de l'image pour couvrir tout l'écran */
+            background-repeat: no-repeat; /* Évite la répétition de l'image */
+            background-position: center center; /* Centre l'image */
+            /* Optionnel : Ajouter un overlay semi-transparent pour améliorer la lisibilité */
+            position: relative;
+            height: 100vh;
+            color: #fff; /* Texte en blanc pour contraster avec l'arrière-plan */
+        }
+
+        /* Overlay semi-transparent */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Noir semi-transparent */
+            z-index: -1; /* Place l'overlay derrière le contenu */
+        }
+
+        .container {
+            position: relative;
+            z-index: 1; /* Place le contenu au-dessus de l'overlay */
+            padding-top: 50px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border: 2px solid #fff;
+            border-radius: 10px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Entrez le Code</h1>
+        <form id="codeForm">
+            <input type="text" id="codeInput" placeholder="Code" required>
+            <button type="submit">Valider</button>
+        </form>
+        <div id="result">
+            <!-- L'image s'affichera ici -->
+        </div>
+    </div>
+
+    <script>
+        // Définir le code actuel. Mettez à jour cette valeur quotidiennement.
+        const CURRENT_CODE = "2308"; // Exemple de code actuel
+
+        // Sélectionner les éléments du DOM
+        const form = document.getElementById('codeForm');
+        const codeInput = document.getElementById('codeInput');
+        const resultDiv = document.getElementById('result');
+
+        // Fonction pour afficher l'image
+        function afficherImage(nomImage) {
+            resultDiv.innerHTML = `<img src="${nomImage}" alt="Résultat">`;
+        }
+
+        // Gestionnaire de soumission du formulaire
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêcher le rechargement de la page
+
+            const codeUtilisateur = codeInput.value.trim();
+
+            if (codeUtilisateur === CURRENT_CODE) {
+                // Si le code est correct, afficher l'image "v.jpg"
+                afficherImage('v.jpg');
+            } else {
+                // Sinon, afficher l'image d'erreur
+                afficherImage('erreur.jpg');
+            }
+
+            // Optionnel : vider le champ de saisie
+            codeInput.value = '';
+        });
+    </script>
+</body>
+</html>
